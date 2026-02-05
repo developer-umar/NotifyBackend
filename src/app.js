@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser"
 const app = express()
 
 app.use(cors({
-    origin: "*",
+    origin: "https://notify-frontend-hazel.vercel.app/",
     credentials: true
 }))
 

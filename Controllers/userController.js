@@ -94,7 +94,7 @@ export const Login = async (req, res) => {
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: true,
-            samesite: "none",
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000,
 
         })
@@ -117,7 +117,7 @@ export const refreshToken = async (req, res) => {
         const token = req.cookies.refreshToken;
 
         if (!token) {
-            res.status(400).json({ message: "token not found " })
+          return   res.status(400).json({ message: "token not found " })
 
         }
 

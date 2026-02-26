@@ -118,7 +118,7 @@ export const deleteNotes = async (req, res) => {
 
     try {
 
-        const deleteNote = await Notes.findByIdAndDelete(
+        const deleteNote = await Notes.findOneAndDelete(
             { _id: req.params.id, user: req.user.id }
         )
 

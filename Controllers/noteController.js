@@ -58,7 +58,7 @@ export const getAllNotes = async (req, res) => {
 export const getNotesbyId = async (req, res) => {
     try {
 
-        const notes = await Notes.findById({ _id: req.params.id,user:req.user.id })
+        const notes = await Notes.findById({ _id: req.params.id, user: req.user.id })
 
         if (!notes) {
 
@@ -154,7 +154,20 @@ export const searchNotes = async (req, res) => {
     // jo bhi sreach me query aae usme agar koi  sepacial character use ho rha taakoi injection na  kar ske security ke  liye ye usn speaicla characters ko  text me convert kar deta hai 
 
     try {
+
         const { query } = req.query;
+
+        if (!query || query.trim() === "") {
+            const notes = await Notes.find({
+                user: req.user.id
+            }).sort({ updatedAt: -1 });
+
+            return res.status(200).json({
+                success: true,
+                count: notes.length,
+                notes,
+            });
+        }
 
 
         const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

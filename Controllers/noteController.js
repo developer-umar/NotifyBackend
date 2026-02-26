@@ -44,7 +44,7 @@ export const getAllNotes = async (req, res) => {
         }).sort({ updatedAt: -1 })
 
 
-        return res.status(201).json({ successs: true, notes, count: notes.length })
+        return res.status(200).json({ successs: true, notes, count: notes.length })
 
     } catch (error) {
 
@@ -58,7 +58,7 @@ export const getAllNotes = async (req, res) => {
 export const getNotesbyId = async (req, res) => {
     try {
 
-        const notes = await Notes.findById({ _id: req.params.id })
+        const notes = await Notes.findById({ _id: req.params.id,user:req.user.id })
 
         if (!notes) {
 

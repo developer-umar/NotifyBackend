@@ -58,7 +58,7 @@ export const getAllNotes = async (req, res) => {
 export const getNotesbyId = async (req, res) => {
     try {
 
-        const notes = await Notes.findById({ _id: req.params.id, user: req.user.id })
+        const notes = await Notes.findOne({ _id: req.params.id, user: req.user.id })
 
         if (!notes) {
 

@@ -117,7 +117,7 @@ export const refreshToken = async (req, res) => {
         const token = req.cookies.refreshToken;
 
         if (!token) {
-          return   res.status(400).json({ message: "token not found " })
+            return res.status(400).json({ message: "token not found " })
 
         }
 
@@ -178,8 +178,16 @@ export const logout = async (req, res) => {
 
     }
 
-    res.clearCookie("accessToken");
-    res.clearCookie("refreshToken")
+    res.clearCookie("accessToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
+    res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    })
 
     return res.status(200).json({ message: " Logged out successfully " })
 
